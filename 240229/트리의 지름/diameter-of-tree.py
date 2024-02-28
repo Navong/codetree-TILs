@@ -1,61 +1,42 @@
 from collections import defaultdict
 
-def find_diameter(n, edges):
-  """
-  Finds the diameter of a tree using depth-first search.
+def dfs(node, graph, visited):
+    visited[node] = True
+    max_distance = 0
+    farthest_node = node
 
-  Args:
-      n: The number of vertices in the tree.
-      edges: A list of tuples where each tuple represents an edge (vertex1, vertex2, distance).
+    for neighbor, distance in graph[node]:
+        if not visited[neighbor]:
+            temp_distance, temp_node = dfs(neighbor, graph, visited)
+            temp_distance += distance
+            if temp_distance > max_distance:
+                max_distance = temp_distance
+                farthest_node = temp_node
 
-  Returns:
-      The diameter of the tree.
-  """
-  # Create an adjacency list representation of the tree
-  graph = defaultdict(list)
-  for u, v, dist in edges:
-    graph[u].append((v, dist))
-    graph[v].append((u, dist))
+    return max_distance, farthest_node
 
-  # Perform depth-first search from any vertex
-  max_dist, farthest_node = dfs(graph, 1, 0, None)
+def diameter_of_tree(n, edges):
+    graph = defaultdict(list)
 
-  # Perform another DFS from the farthest node found in the first DFS
-  diameter = dfs(graph, farthest_node, 0, farthest_node)[0]
-  return diameter
+    for edge in edges:
+        u, v, w = edge
+        graph[u].append((v, w))
+        graph[v].append((u, w))
 
-def dfs(graph, node, current_dist, parent):
-  """
-  Performs depth-first search on a tree and returns the maximum distance and farthest node from the starting node.
+    visited = [False] * (n + 1)
+    distance, node = dfs(1, graph, visited)
+    visited = [False] * (n + 1)
+    diameter, _ = dfs(node, graph, visited)
 
-  Args:
-      graph: The adjacency list representation of the tree.
-      node: The current node being visited.
-      current_dist: The current distance from the starting node.
-      parent: The parent node of the current node.
+    return diameter
 
-  Returns:
-      A tuple containing the maximum distance and the farthest node found.
-  """
-  max_dist_from_here = current_dist
-  farthest_node_from_here = node
-
-  for neighbor, dist in graph[node]:
-    if neighbor != parent:
-      child_dist, child_farthest = dfs(graph, neighbor, current_dist + dist, node)
-      if child_dist > max_dist_from_here:
-        max_dist_from_here = child_dist
-        farthest_node_from_here = child_farthest
-
-  return max_dist_from_here, farthest_node_from_here
-
-# Read input
+# Input reading
 n = int(input())
 edges = []
-for _ in range(n - 1):
-  u, v, dist = map(int, input().split())
-  edges.append((u, v, dist))
 
-# Find and print the diameter
-diameter = find_diameter(n, edges)
-print(diameter)
+for _ in range(n - 1):
+    u, v, w = map(int, input().split())
+    edges.append((u, v, w))
+
+# Calculating the diameter of the tree
+print(diameter_of_tree(n, edges))
