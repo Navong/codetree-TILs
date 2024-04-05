@@ -9,9 +9,10 @@ int main() {
     while(true){
         if (month == till_month && day == till_day)
             break;
-        
-        day++;
+
         elapse_day++;
+        day++;
+        
         if (day > day_of_month[month]){
             month++;
             day = 1;
