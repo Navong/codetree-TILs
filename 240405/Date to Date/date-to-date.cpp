@@ -5,16 +5,16 @@ int main() {
     int month, day, till_month, till_day;
     int elapse_day = 0;
     cin >> month >> day >> till_month >> till_day;
-    int day_of_month[13] = {0, 31, 28,31,30,31,30,31,30,31,30,31,30};
+    int day_of_month[13] = {0, 31, 28,31,30,31,30,31,31,31,30,31,30};
     while(true){
         if (month == till_month && day == till_day)
             break;
         
         day++;
         elapse_day++;
-        if (day == day_of_month[month]){
+        if (day > day_of_month[month]){
             month++;
-            day = 0;
+            day = 1;
         }
     }
 
