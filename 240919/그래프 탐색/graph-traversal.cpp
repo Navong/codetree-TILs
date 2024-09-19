@@ -29,7 +29,7 @@ int main() {
         int x, y;
         cin >> x >> y;
         G[x].push_back(y);
-        //G[y].push_back(x);
+        G[y].push_back(x);
 
         //undirected graph x are y neighbors, y are also x neighbors.
     }
