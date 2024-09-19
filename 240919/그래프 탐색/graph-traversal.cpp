@@ -25,7 +25,7 @@ int main() {
 
     vector<vector<int>> G(N+1); // 1-based graph
 
-    for(int i = 1; i < M; ++i){
+    for(int i = 0; i < M; ++i){
         int x, y;
         cin >> x >> y;
         G[x].push_back(y);
