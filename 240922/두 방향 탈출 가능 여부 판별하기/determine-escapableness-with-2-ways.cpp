@@ -38,16 +38,15 @@ int main(){
         }
     }
 
-    if(marked[0][0]==0||marked[n-1][m-1]==0){
+    if(grid[0][0]==0||grid[n-1][m-1]==0){
         cout << 0 << endl;
         return 0;
     }
 
     dfs(grid, 0, 0, n,m);
 
-    if(marked[n-1][m-1]==1){
-        cout<<1<<endl;
-    }else cout << 0 << endl;
+    if(marked[n-1][m-1]==1) cout<<1<<endl;
+    else cout << 0 << endl;
 
     return 0;
 }
