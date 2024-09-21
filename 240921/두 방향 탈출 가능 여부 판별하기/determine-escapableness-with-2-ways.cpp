@@ -2,20 +2,20 @@
 #include <vector>
 using namespace std;
 
-vector<vector<bool>> marked;
 int dx[] = {1,0};
 int dy[] = {0,1};
 
+vector<vector<bool>> marked;
 
 bool isValid(vector<vector<int>>& grid, int x,int y,int n,int m){
-    return (x<=0&&x>n&&y<=0&&y>m&&grid[x][y]==1&&!marked[x][y]);
+    return (x >=0 && x < n && y >=0 && y < m && grid[x][y]==1 && !marked[x][y]);
 }
 
 
 void dfs(vector<vector<int>>& grid, int x,int y,int n,int m){
     marked[x][y] = true;
 
-    for(int i=0; i<2;++i){
+    for(int i=0; i<4;++i){
         int nx = x + dx[i];
         int ny = y + dy[i];
 
@@ -49,7 +49,7 @@ int main(){
 
 
 
-    if(marked[n-1][m-1]==1){
+    if(marked[n-1][m-1]){
         cout << 1 << endl;
     }else{
         cout << 0 << endl;
