@@ -1,52 +1,52 @@
 #include <iostream>
 #include <iomanip>
+
 using namespace std;
 
-int main() {
-    // 2 row 4 cols
-    int grid[2][4];
-    float hor_avg;
-    float tmp;
+int main(){
+    // 2 rows, 4 cols
+    int grid[100][100];
 
-    for(int i =0;i<2;i++){
-        for(int j=0;j<4;j++){
+    //input grid
+    for(int i=0; i<2; i++){
+        for(int j=0; j<4;j++){
             cin >> grid[i][j];
         }
     }
 
-    // horizon avg
-    for(int i =0;i<2;i++){
-        tmp = 0;
-        for(int j=0;j<4;j++){
-            tmp += grid[i][j];
+    //sumOfrow
+    for(int i=0; i<2; i++){
+        double sumOfrow = 0;
+        for(int j=0; j<4;j++){
+            sumOfrow += grid[i][j];
         }
-        cout <<fixed<<setprecision(1) << tmp/4 << " ";
-    }
-
-    cout << endl;
-    // vertical avg
-    for (int j = 0; j < 4; j++) {
-        double colSum = 0;
-        for (int i = 0; i < 2; i++) {
-            colSum += grid[i][j];
-        }
-        double colAvg = colSum / 2.0;
-        std::cout << std::fixed << std::setprecision(1) << colAvg << " ";
+        cout << fixed << setprecision(1) << sumOfrow/4.0 << " ";
     }
 
     cout << endl;
 
-    double allAvg;
-    for (int i=0; i<2;i++){
-        for (int j=0; j<4;j++){
-            allAvg += grid[i][j];
+    //sumOfcols
+    for(int j=0; j<4; j++){
+        double sumOfcols = 0;
+        for(int i=0; i<4;i++){
+            sumOfcols += grid[i][j];
         }
+        cout << fixed << setprecision(1) << sumOfcols/2.0 << " ";
     }
 
-    cout << fixed << setprecision(1) << allAvg/8.0;
+    cout << endl;
 
+    //sumOfall
+    double sumOfall = 0;
 
-    // all avg
+    for(int i=0; i<2; i++){
+        for(int j=0; j<4;j++){
+            sumOfall += grid[i][j];
+        }
+    }
+    cout << fixed << setprecision(1) << sumOfall/8.0;
+
+    
 
 
     return 0;
